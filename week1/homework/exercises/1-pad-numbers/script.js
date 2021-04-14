@@ -20,6 +20,7 @@ let numbers = [ "12", "846", "2", "1236" ];
 
 // YOUR CODE GOES HERE
 const padLeft =require('./padLeft');
+
 for (let i = 0; i < numbers.length; i++) {
   console.log(padLeft(numbers[i], 5, ' '));
 }
