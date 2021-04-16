@@ -28,6 +28,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(3000); 
 
+
 // resources that I benefit from
 // https://developer.mozilla.org/en-US/docs/Learn/Server-side/Node_server_without_framework 
 // https://nodejs.org/docs/latest-v12.x/api/fs.html#fs_fs_readfile_path_options_callback
