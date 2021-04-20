@@ -11,7 +11,7 @@ server.get(`/`, (req, res) => {
   res.render(`index`);
 });
 
-//
+
 server.post(`/weather`, (req, res) => {
   const { cityName } = req.body;
   res.send(cityName);
