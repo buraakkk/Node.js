@@ -10,25 +10,19 @@
  * - Print the entire response to the console to see how it is structured.
  */
 
-function printChuckNorrisJoke() {
+async function printChuckNorrisJoke() {
   // YOUR CODE GOES IN HERE
-
-  const express = require("express");
-  const axios = require("axios");
-  const app = express();
-  app.get("/", function (req, res) {
-    axios
-      .get("http://api.icndb.com/jokes/random/")
-      .then((response) => {
-        console.log("The random joke id;", response.data.value.id);
-        console.log("The random joke;", response.data.value.joke);
-      })
-      .catch((error) => {
-        console.error(error.response.status);
-        res.status(500);
-        res.send("Oops");
-      });
-  });
-  app.listen(3000);
+  const fetch = require("node-fetch");
+  const randomJoke = 'http://api.icndb.com/jokes/random';
+  try {
+    const res = await fetch(randomJoke);
+    //console.log(await result.json());
+    console.log('Here is the joke:',(await res.json()).value.joke);
+  } catch (error) {
+    console.log('Here is the joke:',error);
+  }
 }
 printChuckNorrisJoke();
+
+// Here is the link that i learnt node-fetch package and benefit to make the homework.
+//https://www.npmjs.com/package/node-fetch 
