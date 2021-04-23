@@ -10,21 +10,10 @@
  * - Check the handlebars npm page for examples and documentation
  */
 
+// Install and require Handlebars. Note that it's just handlebars, not express-handlebars
+ const Handlebars = require("handlebars");
 
-function drawCard() {
-  // YOUR CODE GOES IN HERE
-}
-
-drawCard();
-
-/**
- * Given an array, return an element from it chosen at random
- */
-function getRandomElement(array) {
-  // YOUR CODE GOES IN HERE
-}
-
-const subjects = [
+ const subjects = [
   'shark',
   'popcorn',
   'poison',
@@ -43,3 +32,28 @@ const punchlines = [
   'achieve world piece',
   'help people learn programing',
 ];
+
+function getRandomElement(array) {
+  const ranElement = array[Math.floor(Math.random() * array.length)];
+  return ranElement;
+}
+
+const ranSubject    = getRandomElement(subjects);
+const ranPunchlines = getRandomElement(punchlines);
+
+
+function drawCard(subject, punchline ) {
+const cardData = `${subject} is great to ${punchline}`;
+return cardData;
+}
+
+
+const card = drawCard(ranSubject, ranPunchlines);
+
+// Compile the card using the compile method
+const template = Handlebars.compile('{{card}}');
+
+// execute the compiled template and print the output to the console
+console.log(template({ card }));
+
+
