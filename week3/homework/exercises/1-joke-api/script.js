@@ -13,9 +13,8 @@
 
 async function printChuckNorrisJoke() {
   // YOUR CODE GOES IN HERE
-  const randomJoke = 'http://api.icndb.com/jokes/random';
   try {
-    const res = await fetch(randomJoke);
+    const res = await fetch('http://api.icndb.com/jokes/random');
     //console.log(await result.json());
     const data = await res.json();
     const joke = data.value.joke;
