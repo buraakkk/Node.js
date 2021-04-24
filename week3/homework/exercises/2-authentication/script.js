@@ -7,22 +7,24 @@
  * Hints:
  * - for basic authentication the username and password need to be base64 encoded
  */
-  
- async function printBooks() {
-    // YOUR CODE GOES IN HERE
-  const fetch = require('node-fetch');
-   try {
-     const res = await fetch("https://restapiabasicauthe-sandbox.mxapps.io/api/books", {
-       headers: { 'Authorization': 'Basic YWRtaW46aHZnWDhLbFZFYQ==' }
-     });
-     console.log(await res.json());
-   } catch (error) {
-    console.error(error);
-   }
- }
- printBooks();
+const fetch = require("node-fetch");
 
+async function printBooks() {
+  // YOUR CODE GOES IN HERE
+  try {
+    const res = await fetch(
+      "https://restapiabasicauthe-sandbox.mxapps.io/api/books",
+      {
+        headers: { Authorization: "Basic YWRtaW46aHZnWDhLbFZFYQ==" },
+      }
+    );
+    console.log(await res.json());
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+printBooks();
 
- // I used this website (https://www.base64encode.org/) to convert  the following credentials to base64 encoding:
- // admin:hvgX8KlVEa
- // YWRtaW46aHZnWDhLbFZFYQ== this is base64 encoding which i used to set the Authorization header.
+// I used this website (https://www.base64encode.org/) to convert  the following credentials to base64 encoding:
+// admin:hvgX8KlVEa
+// YWRtaW46aHZnWDhLbFZFYQ== this is base64 encoding which i used to set the Authorization header.
