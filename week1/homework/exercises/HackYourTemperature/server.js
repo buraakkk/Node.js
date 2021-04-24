@@ -17,6 +17,7 @@ server.get(`/`, (req, res) => {
   res.render(`index`);
 });
 
+//after Submit  
 server.post(`/weather`, (req, res) => {
   const { cityName } = req.body;
   if (!cityName){
@@ -32,7 +33,7 @@ server.post(`/weather`, (req, res) => {
     .then((response) => {
       res.render("index", {
         weatherText: `The temperature is ${response.data.main.temp}°C! in ${cityName}.`,
-      });
+      }); 
     })
     .catch((error) => {
       res.render("index", { weatherText: "City is not found!" });
