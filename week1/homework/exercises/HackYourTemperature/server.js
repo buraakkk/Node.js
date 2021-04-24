@@ -1,34 +1,42 @@
 const express = require("express");
-const axios = require('axios');
+const axios = require("axios");
 const expressHandlebars = require("express-handlebars");
+const API_KEY = require("./sources/keys.json").API_KEY;
+
 const server = express();
 
 server.use(express.json());
+//info coming from form as txt,don't do,just keep it as it is.
+server.use(express.urlencoded({ extended: false }));
 
 server.set("view engine", "handlebars");
 server.engine("handlebars", expressHandlebars({ defaultLayout: false }));
 
+//homePage
 server.get(`/`, (req, res) => {
   res.render(`index`);
 });
 
-// For it to work we first have to add the API Key, like so:
-
-
-
 server.post(`/weather`, (req, res) => {
-
-  const API_KEY = require('./sources/keys.json').API_KEY;
   const { cityName } = req.body;
-
-  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${API_KEY}`)
-   .then(response => {
-    res.render('index', { weatherText: `The temperature in ${cityName} is ${response.data.main.temp}°C!` })
-  })
-  .catch(error => {
-    res.render('index', { weatherText: "City is not found!" })
-  })
-
+  if (!cityName){
+    res.render("index", {
+      weatherText: `You didn't write anything.`,
+    });
+    return;
+  } 
+  axios
+    .get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${API_KEY}`
+    )
+    .then((response) => {
+      res.render("index", {
+        weatherText: `The temperature in ${cityName} is ${response.data.main.temp}°C!`,
+      });
+    })
+    .catch((error) => {
+      res.render("index", { weatherText: "City is not found!" });
+    });
 });
 
 server.listen(3000);
