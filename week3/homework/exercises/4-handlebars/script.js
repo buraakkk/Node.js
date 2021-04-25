@@ -34,12 +34,12 @@ const punchlines = [
 ];
 
 function getRandomElement(array) {
-  const ranElement = array[Math.floor(Math.random() * array.length)];
-  return ranElement;
+  const randomElement = array[Math.floor(Math.random() * array.length)];
+  return randomElement;
 }
 
-const ranSubject    = getRandomElement(subjects);
-const ranPunchlines = getRandomElement(punchlines);
+const randomSubject    = getRandomElement(subjects);
+const randomPunchlines = getRandomElement(punchlines);
 
 
 function drawCard(subject, punchline ) {
@@ -47,8 +47,7 @@ const cardData = `${subject} is great to ${punchline}`;
 return cardData;
 }
 
-
-const card = drawCard(ranSubject, ranPunchlines);
+const card = drawCard(randomSubject, randomPunchlines);
 
 // Compile the card using the compile method
 const template = Handlebars.compile('{{card}}');
