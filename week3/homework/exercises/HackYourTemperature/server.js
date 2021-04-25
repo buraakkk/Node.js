@@ -40,7 +40,7 @@ server.post(`/weather`, (req, res) => {
     });
 });
 
-server.listen(3000);
+server.listen(3000, () => console.log('Server started...'));
 
 // https://github.com/ericf/express-handlebars/tree/master/examples/basic
 // the link that i benefit from
