@@ -26,7 +26,8 @@ app.post("/blogs", (req, res) => {
   } 
 
   fs.writeFileSync(title, content);
-  res.end("ok");
+  res.status(201);
+  res.end("Created..");
 });
 
 //updateBook
@@ -43,10 +44,12 @@ app.put("/blogs/:title", (req, res) => {
   // getting title from the url parameters
   const searchedTitle =req.params.title
 
-  if (title === searchedTitle) {
-    fs.writeFileSync(title, content);
+  //existsSync(searchedTitle)
+
+  if ((title === searchedTitle) &&  fs.existsSync(searchedTitle)) {
+    fs.writeFileSync(searchedTitle, content);
     res.status(200);
-    res.end(`Ok ${title} is updated.`);
+    res.end(`Ok ${searchedTitle} is updated.`);
   } else {
     res.status(404);
     res.end("This post does not exist!");
