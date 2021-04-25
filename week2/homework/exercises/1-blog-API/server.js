@@ -14,8 +14,17 @@ const fs = require("fs");
 // creatBook
 app.post("/blogs", (req, res) => {
   // How to get the title and content from the request??
+  
   const title = req.body.title;
   const content = req.body.content;
+
+  // what should you do if there are no title or content?
+  if (!title || !content){
+    res.status(400);
+    res.send("Oops, there is/are something which you are missing !!!");
+    return;
+  } 
+
   fs.writeFileSync(title, content);
   res.end("ok");
 });
@@ -36,8 +45,10 @@ app.put("/blogs/:title", (req, res) => {
 
   if (title === searchedTitle) {
     fs.writeFileSync(title, content);
+    res.status(200);
     res.end(`Ok ${title} is updated.`);
   } else {
+    res.status(404);
     res.end("This post does not exist!");
     return;
   }
@@ -45,9 +56,9 @@ app.put("/blogs/:title", (req, res) => {
 
 //deleteBook
 app.delete("/blogs/:title", (req, res) => {
-  const URLTitle = req.params.title;
-  if (fs.existsSync(URLTitle)) {
-    fs.unlinkSync(URLTitle);
+  const urlTitle = req.params.title;
+  if (fs.existsSync(urlTitle)) {
+    fs.unlinkSync(urlTitle);
     res.end("Ok! The content is deleted!");
   } else {
     res.end("No such blog");
@@ -57,12 +68,12 @@ app.delete("/blogs/:title", (req, res) => {
 //readBook
 app.get("/blogs/:title", (req, res) => {
 
-  const URLTitle = req.params.title;
-  if (fs.existsSync(URLTitle)) {
-    res.end(fs.readFileSync(URLTitle));
+  const urlTitle = req.params.title;
+  if (fs.existsSync(urlTitle)) {
+    res.end(fs.readFileSync(urlTitle));
   } else {
     res.end("This post does not exist!");
   }
 });
 
-app.listen(3000)
+app.listen(3000, () => console.log('Server started...'));
