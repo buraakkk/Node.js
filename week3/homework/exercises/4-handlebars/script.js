@@ -33,26 +33,41 @@ const punchlines = [
   'help people learn programing',
 ];
 
+/**
+ * Given an array, return an element from it chosen at random
+ */
 function getRandomElement(array) {
   const randomElement = array[Math.floor(Math.random() * array.length)];
   return randomElement;
 }
 
-const randomSubject    = getRandomElement(subjects);
-const randomPunchlines = getRandomElement(punchlines);
+function drawCard(subjectArray,punchlineArray) {
+
+  //get random subject and punchline
+  const randomSubject    = getRandomElement(subjectArray);
+  const randomPunchlines = getRandomElement(punchlineArray);
+
+  //create cardData as an object
+  const cardData = {
+    subject: randomSubject,
+    punchline: randomPunchlines
+  };
+
+  //compile the template into a function
+  const card = `{{subject}} is great to {{punchline}}.`;
+  const template = Handlebars.compile(card);
 
 
-function drawCard(subject, punchline ) {
-const cardData = `${subject} is great to ${punchline}`;
-return cardData;
+  //render the template
+  const result = template(cardData);
+  console.log(result);
 }
 
-const card = drawCard(randomSubject, randomPunchlines);
+drawCard(subjects,punchlines);
 
-// Compile the card using the compile method
-const template = Handlebars.compile('{{card}}');
+//https://www.npmjs.com/package/handlebars while creation of drawCard function, i benefit from that link.
+//source is card and data is cardData in our example.
 
-// execute the compiled template and print the output to the console
-console.log(template({ card }));
+
 
 
