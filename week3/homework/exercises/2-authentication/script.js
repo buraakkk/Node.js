@@ -11,18 +11,19 @@ const fetch = require("node-fetch");
 
 async function printBooks() {
   // YOUR CODE GOES IN HERE
+  const credential = `YWRtaW46aHZnWDhLbFZFYQ==`;
   try {
     const res = await fetch(
       "https://restapiabasicauthe-sandbox.mxapps.io/api/books",
       {
-        headers: { Authorization: "Basic YWRtaW46aHZnWDhLbFZFYQ==" },
+        headers: { Authorization: `Basic ${credential}` },
       }
     );
     console.log(await res.json());
   } catch (error) {
     console.log(error.message);
   }
-}
+} 
 printBooks();
 
 // I used this website (https://www.base64encode.org/) to convert  the following credentials to base64 encoding:
