@@ -32,8 +32,7 @@ async function makeReservation() {
       body: JSON.stringify(reservationInfo),
       headers: { 'Content-Type': 'application/json' },
     });
-    const data = await res.json();
-    console.log(data);
+    console.log(await res.json());
   } catch (error) {
     console.log(error.message);
   }
